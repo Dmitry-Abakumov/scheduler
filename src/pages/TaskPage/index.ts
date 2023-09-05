@@ -1,2 +1,2 @@
-import AddTaskForm from "../../components/AddTaskForm";
-export default AddTaskForm;
+import TaskPage from "./TaskPage";
+export default TaskPage;
