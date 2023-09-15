@@ -1,7 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import { nanoid } from "nanoid";
 
 import { ITask } from "../../Types";
+
+import { addTask, getAllTasks } from "../../shared/services/tasks-api";
 
 type Props = {
   setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
@@ -10,18 +11,14 @@ type Props = {
 const AddTaskForm = ({ setTasks }: Props) => {
   const [field, setField] = useState("");
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    setTasks((prev) => {
-      const task = {
-        task: field,
-        id: nanoid(),
-      };
+    if (field.trim() === "") return;
 
-      return [...prev, task];
-    });
+    await addTask({ text: field, done: false });
 
+    setTasks(await getAllTasks());
     setField("");
   };
 

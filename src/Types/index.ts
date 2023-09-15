@@ -1,4 +1,5 @@
 export interface ITask {
-  task: string;
-  id: string;
+  text: string;
+  _id: string;
+  done: boolean;
 }

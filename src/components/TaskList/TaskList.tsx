@@ -12,8 +12,8 @@ type Props = {
 const TaskList = ({ tasks, setTasks }: Props) => {
   return (
     <>
-      {tasks.map(({ task, id }) => (
-        <Task task={task} setTasks={setTasks} id={id} />
+      {tasks.map(({ text, _id, done }) => (
+        <Task key={_id} text={text} setTasks={setTasks} _id={_id} done={done} />
       ))}
     </>
   );
