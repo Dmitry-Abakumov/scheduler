@@ -1,0 +1,31 @@
+.filter {
+  display: flex;
+  justify-content: center;
+}
+
+.hide {
+  display: none;
+}
+
+.label {
+}
+
+.currentOption {
+  position: relative;
+  cursor: pointer;
+}
+
+.labelWrapper {
+  position: absolute;
+  left: 50%;
+
+  transform: translate(-50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  background-color: #fff;
+  border-radius: 5px;
+}

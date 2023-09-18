@@ -4,6 +4,8 @@ import { ITask } from "../../Types";
 
 import { addTask, getAllTasks } from "../../shared/services/tasks-api";
 
+import css from "./AddTaskForm.module.css"
+
 type Props = {
   setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
 };
@@ -26,9 +28,9 @@ const AddTaskForm = ({ setTasks }: Props) => {
     setField(e.target.value);
   };
   return (
-    <form onSubmit={onSubmit}>
+    <form className={css.form} onSubmit={onSubmit}>
       <input onChange={onChange} type="text" value={field} />
-      <button type="submit">Добавить задачу</button>
+      <button className={css.button} type="submit">Добавить задачу</button>
     </form>
   );
 };

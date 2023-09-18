@@ -10,6 +10,12 @@ export const getAllTasks = async () => {
   return data;
 };
 
+export const getFilteredTasks = async (filterOption?: { done: boolean }) => {
+  const { data } = await instance.get(`/tasks`);
+
+  return data;
+};
+
 export const addTask = async (body: { text: string; done: boolean }) => {
   await instance.post("/tasks", body);
 };
@@ -28,3 +34,5 @@ export const deleteTaskById = async (_id: string) => {
 
   return data;
 };
+
+export const getCompletedTasks = () => {};

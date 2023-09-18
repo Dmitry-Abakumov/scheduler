@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
 import AddTaskForm from "../../components/AddTaskForm";
-import TaskList from "../../components/TaskList/TaskList";
+import TaskList from "../../components/Task/TaskList/TaskList";
+import Filter from "../../components/Filter";
 
 import { ITask } from "../../Types";
 
@@ -20,6 +21,7 @@ const TaskPage = () => {
 
   return (
     <>
+      <Filter setTasks={setTasks} />
       <AddTaskForm setTasks={setTasks} />
       <TaskList tasks={tasks} setTasks={setTasks} />
     </>
