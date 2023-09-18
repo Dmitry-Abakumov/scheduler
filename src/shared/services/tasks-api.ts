@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:3001/api",
+  baseURL: "http://localhost:3002/api",
 });
 
 export const getAllTasks = async () => {
@@ -11,7 +11,13 @@ export const getAllTasks = async () => {
 };
 
 export const getFilteredTasks = async (filterOption?: { done: boolean }) => {
-  const { data } = await instance.get(`/tasks`);
+  const { data } = await instance.get(
+    `/tasks${
+      filterOption
+        ? `?${Object.keys(filterOption)[0]}=${filterOption.done}`
+        : ""
+    }`
+  );
 
   return data;
 };

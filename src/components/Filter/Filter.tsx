@@ -26,13 +26,17 @@ const Filter = ({ setTasks }: Props) => {
     setFilterOption(value);
     setIsMunuShow(false);
 
-    let data: ITask[];
-
     if (value === "all") {
-      data = await getFilteredTasks();
+      console.log("all tasks request");
+      const data = await getFilteredTasks();
+      setTasks(data);
+
+      return;
     }
 
-    data = await getFilteredTasks({ done: value === "done" ? true : false });
+    const data = await getFilteredTasks({
+      done: value === "done" ? true : false,
+    });
 
     setTasks(data);
   };
