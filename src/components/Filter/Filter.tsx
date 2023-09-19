@@ -2,43 +2,30 @@ import React, { useState, ChangeEvent } from "react";
 
 import fields from "./fields";
 
-import { ITask } from "../../Types";
+import getAndSetTasksByFilter from "../../shared/utils/getAndSetTasksByFilter";
 
-import { getFilteredTasks } from "../../shared/services/tasks-api";
+import { ITask } from "../../Types";
 
 import css from "./Filter.module.css";
 
 interface Props {
   setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
+  filterOption: string;
+  setFilterOption: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Filter = ({ setTasks }: Props) => {
-  const [filterOption, setFilterOption] = useState("all");
+const Filter = ({ setTasks, filterOption, setFilterOption }: Props) => {
   const [isMenuShow, setIsMunuShow] = useState(false);
 
   const isOptionSelected = (option: string) => {
     return option === filterOption;
   };
 
-  const onChange = async ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => {
+  const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setFilterOption(value);
     setIsMunuShow(false);
 
-    if (value === "all") {
-      console.log("all tasks request");
-      const data = await getFilteredTasks();
-      setTasks(data);
-
-      return;
-    }
-
-    const data = await getFilteredTasks({
-      done: value === "done" ? true : false,
-    });
-
-    setTasks(data);
+    getAndSetTasksByFilter(value, setTasks);
   };
 
   return (
@@ -50,7 +37,7 @@ const Filter = ({ setTasks }: Props) => {
         {filterOption}
         <div className={isMenuShow ? `${css.labelWrapper}` : `${css.hide}`}>
           <label htmlFor="all">all</label>
-          <label htmlFor="done">completed</label>
+          <label htmlFor="done">done</label>
           <label htmlFor="in progress">in progress</label>
         </div>
       </div>
