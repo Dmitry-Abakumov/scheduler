@@ -7,6 +7,8 @@ const Navbar = () => {
     <div className={css.navbarWrap}>
       <NavLink to="/home">Home</NavLink>
       <NavLink to="/tasks">Tasks</NavLink>
+      <NavLink to="/login">Login</NavLink>
+      <NavLink to="/register">Register</NavLink>
     </div>
   );
 };
