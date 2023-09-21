@@ -23,20 +23,22 @@ export const getFilteredTasks = async (filterOption?: { done: boolean }) => {
 };
 
 export const addTask = async (body: { text: string; done: boolean }) => {
-  await instance.post("/tasks", body);
+  const { data } = await instance.post("/tasks", body);
+
+  return data;
 };
 
 export const updateDoneById = async (
   _id: string,
   { done }: { done: boolean }
 ) => {
-  const data = await instance.patch(`/tasks/${_id}/done`, { done });
+  const { data } = await instance.patch(`/tasks/${_id}/done`, { done });
 
   return data;
 };
 
 export const deleteTaskById = async (_id: string) => {
-  const data = await instance.delete(`/tasks/${_id}`);
+  const { data } = await instance.delete(`/tasks/${_id}`);
 
   return data;
 };

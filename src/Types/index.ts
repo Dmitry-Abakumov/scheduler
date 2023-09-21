@@ -3,3 +3,9 @@ export interface ITask {
   _id: string;
   done: boolean;
 }
+
+export interface ITasksState {
+  items: ITask[];
+  isLoading: boolean;
+  error: null | Error;
+}

@@ -1,23 +1,21 @@
-import React from "react";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 import Task from "./Task/Task";
 
-import { ITask } from "../../Types";
+import { getTasks } from "../../redux/tasks/taskSelectors";
 
 type Props = {
-  tasks: ITask[];
-  setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
   filterOption: string;
 };
 
-const TaskList = ({ tasks, setTasks, filterOption }: Props) => {
+const TaskList = ({ filterOption }: Props) => {
+  const tasks = useSelector(getTasks);
   return (
     <>
       {tasks.map(({ text, _id, done }) => (
         <Task
           key={_id}
           text={text}
-          setTasks={setTasks}
           _id={_id}
           done={done}
           filterOption={filterOption}

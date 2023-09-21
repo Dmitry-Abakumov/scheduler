@@ -1,10 +1,12 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+
+import { fetchAddTask, fetchAllTasks } from "../../redux/tasks/tasksOperations";
 
 import { ITask } from "../../Types";
 
-import { addTask, getAllTasks } from "../../shared/services/tasks-api";
-
-import css from "./AddTaskForm.module.css"
+import css from "./AddTaskForm.module.css";
 
 type Props = {
   setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
@@ -13,14 +15,15 @@ type Props = {
 const AddTaskForm = ({ setTasks }: Props) => {
   const [field, setField] = useState("");
 
+  const dispatch = useDispatch<AppDispatch>();
+
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (field.trim() === "") return;
 
-    await addTask({ text: field, done: false });
+    dispatch(fetchAddTask({ text: field, done: false }));
 
-    setTasks(await getAllTasks());
     setField("");
   };
 
@@ -30,7 +33,9 @@ const AddTaskForm = ({ setTasks }: Props) => {
   return (
     <form className={css.form} onSubmit={onSubmit}>
       <input onChange={onChange} type="text" value={field} />
-      <button className={css.button} type="submit">Добавить задачу</button>
+      <button className={css.button} type="submit">
+        Добавить задачу
+      </button>
     </form>
   );
 };

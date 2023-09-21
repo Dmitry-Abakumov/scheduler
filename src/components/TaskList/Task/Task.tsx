@@ -1,32 +1,26 @@
-import React from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../redux/store";
+
+import { fetchDeleteTask } from "../../../redux/tasks/tasksOperations";
 
 import { ITask } from "../../../Types";
 
-import {
-  updateDoneById,
-  deleteTaskById,
-} from "../../../shared/services/tasks-api";
+import { updateDoneById } from "../../../shared/services/tasks-api";
 
 import css from "./Task.module.css";
 
-import getAndSetTasksByFilter from "../../../shared/utils/getAndSetTasksByFilter";
-
 interface Props extends ITask {
-  setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
   filterOption: string;
 }
 
-const Task = ({ text, setTasks, _id, done, filterOption }: Props) => {
+const Task = ({ text, _id, done, filterOption }: Props) => {
+  const dispatch = useDispatch<AppDispatch>();
   const onDeleteBtnClick = async () => {
-    await deleteTaskById(_id);
-
-    getAndSetTasksByFilter(filterOption, setTasks);
+    dispatch(fetchDeleteTask(_id));
   };
 
   const onChackboxChange = async () => {
     await updateDoneById(_id, { done: !done });
-
-    getAndSetTasksByFilter(filterOption, setTasks);
   };
 
   return (
