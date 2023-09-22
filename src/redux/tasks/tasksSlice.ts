@@ -4,6 +4,7 @@ import {
   fetchAllTasks,
   fetchDeleteTask,
   fetchAddTask,
+  fetchUpdateDone,
 } from "./tasksOperations";
 
 import { ITask, ITasksState } from "../../Types";
@@ -62,7 +63,32 @@ const tasksSlice = createSlice({
           store.isLoading = false;
         }
       )
-      .addCase(fetchAddTask.rejected, handleRejected);
+      .addCase(fetchAddTask.rejected, handleRejected)
+
+      .addCase(fetchUpdateDone.pending, handlePanding)
+      .addCase(
+        fetchUpdateDone.fulfilled,
+        (store, { payload }: PayloadAction<string | undefined>) => {
+          const nextTasks: ITask[] = store.items.map((i) => {
+            if (i._id === payload) {
+              return {
+                ...i,
+                done: !i.done,
+              };
+            }
+
+            return i;
+          });
+          store.items = nextTasks;
+          store.isLoading = false;
+        }
+      )
+      .addCase(fetchUpdateDone.rejected, handleRejected)
+
+      .addCase("setFilteredTasks", (store, { payload }: any) => {
+        console.log(payload);
+        store.items = payload;
+      });
   },
 });
 

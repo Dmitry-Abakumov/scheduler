@@ -1,24 +1,33 @@
+import { AppDispatch } from "../../redux/store";
+
 import { getFilteredTasks } from "../services/tasks-api";
 
 import { ITask } from "../../Types";
 
 const getAndSetTasksByFilter = async (
   filterOption: string,
-  setTasks: React.Dispatch<React.SetStateAction<ITask[]>>
+  dispatch: AppDispatch
 ) => {
   if (filterOption === "all") {
     console.log("all tasks request");
-    const data = await getFilteredTasks();
-    setTasks(data);
+    try {
+      const data: ITask[] = await getFilteredTasks();
+
+      // console.log(data);
+
+      dispatch({ type: "setFilteredTasks", payload: data });
+    } catch {}
 
     return;
   }
 
-  const data = await getFilteredTasks({
-    done: filterOption === "done" ? true : false,
-  });
+  try {
+    const data: ITask[] = await getFilteredTasks({
+      done: filterOption === "done" ? true : false,
+    });
 
-  setTasks(data);
+    dispatch({ type: "setFilteredTasks", payload: data });
+  } catch {}
 };
 
 export default getAndSetTasksByFilter;

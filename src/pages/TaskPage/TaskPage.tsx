@@ -7,12 +7,9 @@ import AddTaskForm from "../../components/AddTaskForm";
 import TaskList from "../../components/TaskList/TaskList";
 import Filter from "../../components/Filter";
 
-import { ITask } from "../../Types";
-
 import { fetchAllTasks } from "../../redux/tasks/tasksOperations";
 
 const TaskPage = () => {
-  const [tasks, setTasks] = useState<ITask[]>([]);
   const [filterOption, setFilterOption] = useState("all");
 
   const dispatch = useDispatch<AppDispatch>();
@@ -25,12 +22,8 @@ const TaskPage = () => {
 
   return (
     <>
-      <Filter
-        setTasks={setTasks}
-        filterOption={filterOption}
-        setFilterOption={setFilterOption}
-      />
-      <AddTaskForm setTasks={setTasks} />
+      <Filter filterOption={filterOption} setFilterOption={setFilterOption} />
+      <AddTaskForm />
       <TaskList filterOption={filterOption} />
     </>
   );

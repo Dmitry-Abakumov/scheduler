@@ -2,17 +2,11 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 
-import { fetchAddTask, fetchAllTasks } from "../../redux/tasks/tasksOperations";
-
-import { ITask } from "../../Types";
+import { fetchAddTask } from "../../redux/tasks/tasksOperations";
 
 import css from "./AddTaskForm.module.css";
 
-type Props = {
-  setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
-};
-
-const AddTaskForm = ({ setTasks }: Props) => {
+const AddTaskForm = () => {
   const [field, setField] = useState("");
 
   const dispatch = useDispatch<AppDispatch>();

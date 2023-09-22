@@ -1,21 +1,23 @@
 import React, { useState, ChangeEvent } from "react";
+import { useDispatch } from "react-redux";
+
+import { AppDispatch } from "../../redux/store";
 
 import fields from "./fields";
 
 import getAndSetTasksByFilter from "../../shared/utils/getAndSetTasksByFilter";
 
-import { ITask } from "../../Types";
-
 import css from "./Filter.module.css";
 
 interface Props {
-  setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
   filterOption: string;
   setFilterOption: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Filter = ({ setTasks, filterOption, setFilterOption }: Props) => {
+const Filter = ({ filterOption, setFilterOption }: Props) => {
   const [isMenuShow, setIsMunuShow] = useState(false);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const isOptionSelected = (option: string) => {
     return option === filterOption;
@@ -25,7 +27,7 @@ const Filter = ({ setTasks, filterOption, setFilterOption }: Props) => {
     setFilterOption(value);
     setIsMunuShow(false);
 
-    getAndSetTasksByFilter(value, setTasks);
+    getAndSetTasksByFilter(value, dispatch);
   };
 
   return (

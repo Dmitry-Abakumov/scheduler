@@ -3,9 +3,11 @@ import { AppDispatch } from "../../../redux/store";
 
 import { fetchDeleteTask } from "../../../redux/tasks/tasksOperations";
 
+import getAndSetTasksByFilter from "../../../shared/utils/getAndSetTasksByFilter";
+
 import { ITask } from "../../../Types";
 
-import { updateDoneById } from "../../../shared/services/tasks-api";
+import { fetchUpdateDone } from "../../../redux/tasks/tasksOperations";
 
 import css from "./Task.module.css";
 
@@ -20,7 +22,9 @@ const Task = ({ text, _id, done, filterOption }: Props) => {
   };
 
   const onChackboxChange = async () => {
-    await updateDoneById(_id, { done: !done });
+    await dispatch(fetchUpdateDone({ _id, data: { done: !done } }));
+
+    getAndSetTasksByFilter(filterOption, dispatch);
   };
 
   return (
