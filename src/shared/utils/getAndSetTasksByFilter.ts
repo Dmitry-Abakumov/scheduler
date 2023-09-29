@@ -13,8 +13,6 @@ const getAndSetTasksByFilter = async (
     try {
       const data: ITask[] = await getFilteredTasks();
 
-      // console.log(data);
-
       dispatch({ type: "setFilteredTasks", payload: data });
     } catch {}
 

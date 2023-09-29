@@ -1,5 +1,16 @@
-import { useState } from "react";
+import { Formik, Form, Field } from "formik";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+
+import { fetchRegister } from "../../redux/auth/authOperations";
+
 import fields from "./fields";
+
+interface Values {
+  login: string;
+  email: string;
+  password: string;
+}
 
 const initialFields = {
   login: "",
@@ -8,30 +19,23 @@ const initialFields = {
 };
 
 const RegisterForm = () => {
-  const [inputsData, setInputsData] = useState(initialFields);
-
-  const onChange = ({
-    target: { value, name },
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setInputsData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const { login, email, password } = inputsData;
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
-    <form>
-      <input type="text" {...fields.login} onChange={onChange} value={login} />
-      <input type="email" {...fields.email} onChange={onChange} value={email} />
-      <input
-        type="text"
-        {...fields.password}
-        onChange={onChange}
-        value={password}
-      />
-    </form>
+    <Formik
+      initialValues={initialFields}
+      onSubmit={(values: Values, { resetForm }) => {
+        dispatch(fetchRegister(values));
+        resetForm();
+      }}
+    >
+      <Form>
+        <Field {...fields.login} />
+        <Field {...fields.email} />
+        <Field {...fields.password} />
+        <button type="submit">Register</button>
+      </Form>
+    </Formik>
   );
 };
 

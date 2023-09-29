@@ -1,35 +1,38 @@
-import { useState } from "react";
+import { Formik, Field, Form } from "formik";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+
+import { fetchLogin } from "../../redux/auth/authOperations";
+
 import fields from "./fields";
 
+interface Values {
+  email: string;
+  password: string;
+}
+
 const initialFields = {
-  login: "",
+  email: "",
   password: "",
 };
 
 const LoginForm = () => {
-  const [inputsData, setInputsData] = useState(initialFields);
-
-  const onChange = ({
-    target: { value, name },
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setInputsData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const { login, password } = inputsData;
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
-    <form>
-      <input type="text" {...fields.login} onChange={onChange} value={login} />
-      <input
-        type="text"
-        {...fields.password}
-        onChange={onChange}
-        value={password}
-      />
-    </form>
+    <Formik
+      initialValues={initialFields}
+      onSubmit={(values: Values, { resetForm }) => {
+        dispatch(fetchLogin(values));
+        resetForm();
+      }}
+    >
+      <Form>
+        <Field {...fields.email} />
+        <Field {...fields.password} />
+        <button type="submit">Login</button>
+      </Form>
+    </Formik>
   );
 };
 

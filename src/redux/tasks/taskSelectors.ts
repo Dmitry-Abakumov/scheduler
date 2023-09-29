@@ -1,3 +1,3 @@
-import { ITasksState } from "../../Types";
+import { ITasksStore } from "./tasksSlice";
 
-export const getTasks = ({ tasks }: { tasks: ITasksState }) => tasks.items;
+export const getTasks = ({ tasks }: { tasks: ITasksStore }) => tasks.items;

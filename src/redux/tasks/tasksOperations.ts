@@ -28,6 +28,7 @@ export const fetchDeleteTask = createAsyncThunk(
       const { _id }: ITask = await API.deleteTaskById(id);
       return _id;
     } catch ({ response: { data } }: any) {
+      console.log(data);
       rejectWithValue(data);
     }
   }
@@ -50,7 +51,7 @@ export const fetchUpdateDone = createAsyncThunk(
   "tasks/fetchUpdateDone",
   async ({ _id: id, data }: IUpdateDoneParams, { rejectWithValue }) => {
     try {
-      const { _id } = await API.updateDoneById(id, data);
+      const { _id }: ITask = await API.updateDoneById(id, data);
 
       return _id;
     } catch ({ response: { data } }: any) {
