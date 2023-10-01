@@ -29,3 +29,10 @@ export const login = async (body: ILoginBody) => {
 
   return data;
 };
+
+export const getCurrent = async (token: string) => {
+  setToken(token);
+  const { data } = await instance.get("auth/current");
+
+  return data;
+};

@@ -1,6 +1,6 @@
 import { AnyAction, createSlice } from "@reduxjs/toolkit";
 
-import { IUser, fetchLogin } from "./authOperations";
+import { IUser, fetchCurrent, fetchLogin } from "./authOperations";
 
 import { fetchRegister } from "./authOperations";
 
@@ -12,7 +12,7 @@ interface IAuthStore {
   token: null | string;
   isLoggedIn: boolean;
   isLoading: boolean;
-  error: null | string;
+  error: any;
 }
 
 const initialState = {
@@ -26,14 +26,16 @@ const initialState = {
   error: null,
 };
 
-const handlePanding = (store: IAuthStore) => {
+const handlePending = (store: IAuthStore) => {
   store.isLoading = true;
   store.error = null;
 };
 
 const handleRejected = (store: IAuthStore, { payload }: AnyAction) => {
+  console.log("handleRejected");
   store.isLoading = false;
   store.error = payload;
+  store.token = null;
 };
 
 const authSlice = createSlice({
@@ -42,7 +44,7 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchRegister.pending, handlePanding)
+      .addCase(fetchRegister.pending, handlePending)
       .addCase(fetchRegister.fulfilled, (store: IAuthStore, { payload }) => {
         store.user = payload as IUser;
         store.isLoading = false;
@@ -50,7 +52,7 @@ const authSlice = createSlice({
       })
       .addCase(fetchRegister.rejected, handleRejected)
 
-      .addCase(fetchLogin.pending, handlePanding)
+      .addCase(fetchLogin.pending, handlePending)
       .addCase(fetchLogin.fulfilled, (store: IAuthStore, { payload }) => {
         store.user = {
           login: payload?.login as string,
@@ -61,7 +63,16 @@ const authSlice = createSlice({
         store.isLoading = false;
         store.error = null;
       })
-      .addCase(fetchLogin.rejected, handleRejected);
+      .addCase(fetchLogin.rejected, handleRejected)
+
+      .addCase(fetchCurrent.pending, handlePending)
+      .addCase(fetchCurrent.fulfilled, (store: IAuthStore, { payload }) => {
+        store.user = payload as IUser;
+        store.isLoading = false;
+        store.isLoggedIn = true;
+        store.error = null;
+      })
+      .addCase(fetchCurrent.rejected, handleRejected);
   },
 });
 

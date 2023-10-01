@@ -2,7 +2,9 @@ import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 
-import { fetchRegister } from "../../redux/auth/authOperations";
+import { AnyAction } from "@reduxjs/toolkit";
+
+import { fetchLogin, fetchRegister } from "../../redux/auth/authOperations";
 
 import fields from "./fields";
 
@@ -24,8 +26,17 @@ const RegisterForm = () => {
   return (
     <Formik
       initialValues={initialFields}
-      onSubmit={(values: Values, { resetForm }) => {
-        dispatch(fetchRegister(values));
+      onSubmit={async ({ email, login, password }: Values, { resetForm }) => {
+        const {
+          meta: { requestStatus },
+        }: AnyAction = await dispatch(
+          fetchRegister({ email, login, password })
+        );
+
+        if (requestStatus === "fulfilled") {
+          await dispatch(fetchLogin({ email, password }));
+        }
+
         resetForm();
       }}
     >

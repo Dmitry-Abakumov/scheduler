@@ -16,7 +16,7 @@ const AddTaskForm = () => {
 
     if (field.trim() === "") return;
 
-    dispatch(fetchAddTask({ text: field, done: false }));
+    dispatch(fetchAddTask({ text: field }));
 
     setField("");
   };

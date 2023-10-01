@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "http://localhost:3001/api",
 });
 
 export const getAllTasks = async () => {
@@ -22,7 +22,7 @@ export const getFilteredTasks = async (filterOption?: { done: boolean }) => {
   return data;
 };
 
-export const addTask = async (body: { text: string; done: boolean }) => {
+export const addTask = async (body: { text: string }) => {
   const { data } = await instance.post("/tasks", body);
 
   return data;

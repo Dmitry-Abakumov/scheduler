@@ -1,4 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { AxiosError } from "axios";
+
+import { RootState } from "../store";
 
 import * as API from "../../shared/services/auth-api";
 
@@ -16,20 +19,51 @@ export const fetchRegister = createAsyncThunk(
     try {
       const user: IUser = await API.register(data);
       return user;
-    } catch ({ response: { data } }: any) {
-      rejectWithValue(data);
+    } catch (error) {
+      const { response } = error as AxiosError;
+      return rejectWithValue(response?.data);
     }
   }
 );
 
 export const fetchLogin = createAsyncThunk(
-  "aith/login",
+  "auth/login",
   async (data: ILoginBody, { rejectWithValue }) => {
     try {
       const user: IUser = await API.login(data);
       return user;
-    } catch ({ response: { data } }: any) {
-      rejectWithValue(data);
+    } catch (error) {
+      const { response } = error as AxiosError;
+      return rejectWithValue(response?.data);
     }
+  }
+);
+
+export const fetchCurrent = createAsyncThunk(
+  "auth/current",
+  async (_, { rejectWithValue, getState }) => {
+    const {
+      auth: { token },
+    } = getState() as RootState;
+
+    try {
+      if (typeof token !== "string") return;
+
+      const user: IUser = await API.getCurrent(token);
+
+      return user;
+    } catch (error) {
+      const { response } = error as AxiosError;
+      return rejectWithValue(response?.data);
+    }
+  },
+  {
+    condition: (_, { getState }) => {
+      const {
+        auth: { token },
+      } = getState() as RootState;
+
+      if (!token) return false;
+    },
   }
 );

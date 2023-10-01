@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { AxiosError } from "axios";
+
 import * as API from "../../shared/services/tasks-api";
 import { ITask } from "../../Types";
 
@@ -16,7 +18,7 @@ export const fetchAllTasks = createAsyncThunk(
 
       return tasks;
     } catch ({ response: { data } }: any) {
-      rejectWithValue(data);
+      return rejectWithValue(data);
     }
   }
 );
@@ -27,22 +29,23 @@ export const fetchDeleteTask = createAsyncThunk(
     try {
       const { _id }: ITask = await API.deleteTaskById(id);
       return _id;
-    } catch ({ response: { data } }: any) {
-      console.log(data);
-      rejectWithValue(data);
+    } catch (error) {
+      const { response } = error as AxiosError;
+      return rejectWithValue(response?.data);
     }
   }
 );
 
 export const fetchAddTask = createAsyncThunk(
   "tasks/fetchAdd",
-  async (data: { text: string; done: boolean }, { rejectWithValue }) => {
+  async (data: { text: string }, { rejectWithValue }) => {
     try {
       const { text, done, _id }: ITask = await API.addTask({ ...data });
 
       return { text, done, _id };
-    } catch ({ response: { data } }: any) {
-      rejectWithValue(data);
+    } catch (error) {
+      const { response } = error as AxiosError;
+      return rejectWithValue(response?.data);
     }
   }
 );
@@ -54,8 +57,9 @@ export const fetchUpdateDone = createAsyncThunk(
       const { _id }: ITask = await API.updateDoneById(id, data);
 
       return _id;
-    } catch ({ response: { data } }: any) {
-      rejectWithValue(data);
+    } catch (error) {
+      const { response } = error as AxiosError;
+      return rejectWithValue(response?.data);
     }
   }
 );
