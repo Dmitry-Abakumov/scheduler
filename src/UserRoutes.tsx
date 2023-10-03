@@ -1,6 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
+import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
+
 const TaskPage = lazy(() => import("./pages/TaskPage"));
 const LoginPage = lazy(() => import("./pages/LiginPage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
