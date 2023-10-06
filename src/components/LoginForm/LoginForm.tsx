@@ -6,6 +6,8 @@ import { fetchLogin } from "../../redux/auth/authOperations";
 
 import fields from "./fields";
 
+import css from "./LoginForm.module.css";
+
 interface Values {
   email: string;
   password: string;
@@ -27,10 +29,12 @@ const LoginForm = () => {
         resetForm();
       }}
     >
-      <Form>
-        <Field {...fields.email} />
-        <Field {...fields.password} />
-        <button type="submit">Login</button>
+      <Form className={css.form}>
+        <Field {...fields.email} className={css.input} />
+        <Field {...fields.password} className={css.input} />
+        <button type="submit" className={css.btn}>
+          Login
+        </button>
       </Form>
     </Formik>
   );
