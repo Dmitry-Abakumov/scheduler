@@ -2,6 +2,8 @@ import { Formik, Field, Form } from "formik";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 
+import TextField from "../../shared/components/TextField";
+
 import { fetchLogin } from "../../redux/auth/authOperations";
 
 import fields from "./fields";
@@ -30,8 +32,8 @@ const LoginForm = () => {
       }}
     >
       <Form className={css.form}>
-        <Field {...fields.email} className={css.input} />
-        <Field {...fields.password} className={css.input} />
+        <TextField {...fields.email} />
+        <TextField {...fields.password} />
         <button type="submit" className={css.btn}>
           Login
         </button>

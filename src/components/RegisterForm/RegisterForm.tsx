@@ -8,6 +8,8 @@ import { fetchLogin, fetchRegister } from "../../redux/auth/authOperations";
 
 import fields from "./fields";
 
+import css from "./RegisterForm.module.css";
+
 interface Values {
   login: string;
   email: string;
@@ -40,11 +42,13 @@ const RegisterForm = () => {
         resetForm();
       }}
     >
-      <Form>
-        <Field {...fields.login} />
-        <Field {...fields.email} />
-        <Field {...fields.password} />
-        <button type="submit">Register</button>
+      <Form className={css.form}>
+        <Field {...fields.login} className={css.input} />
+        <Field {...fields.email} className={css.input} />
+        <Field {...fields.password} className={css.input} />
+        <button type="submit" className={css.btn}>
+          Register
+        </button>
       </Form>
     </Formik>
   );

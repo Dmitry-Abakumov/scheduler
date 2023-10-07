@@ -17,12 +17,10 @@ const App = () => {
   });
 
   return (
-    <>
+    <div className={css.container}>
       <Navbar />
-      <div className={css.container}>
-        <UserRoutes />
-      </div>
-    </>
+      <UserRoutes />
+    </div>
   );
 };
 
