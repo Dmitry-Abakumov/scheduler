@@ -6,7 +6,7 @@ import PublicRoute from "./components/PublicRoute";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const TaskPage = lazy(() => import("./pages/TaskPage"));
-const LoginPage = lazy(() => import("./pages/LoiginPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 
 const UserRoutes = () => {

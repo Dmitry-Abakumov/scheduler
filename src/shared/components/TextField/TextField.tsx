@@ -13,10 +13,12 @@ type Props = {
 const TextField = ({ label, ...props }: Props) => {
   const id = nanoid();
   return (
-    <>
-      <label htmlFor={id}>{label}</label>
-      <Field {...props} className={css.input} />
-    </>
+    <div>
+      <label htmlFor={id} className={css.label}>
+        {label}
+      </label>
+      <Field {...props} id={id} className={css.input} />
+    </div>
   );
 };
 

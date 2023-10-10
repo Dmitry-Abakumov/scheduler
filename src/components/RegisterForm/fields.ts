@@ -12,7 +12,7 @@ const fields = {
     type: "email",
   },
   password: {
-    lsbel: "password",
+    label: "password",
     name: "password",
     placeholder: "password",
     type: "password",

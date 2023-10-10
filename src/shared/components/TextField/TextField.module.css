@@ -2,6 +2,37 @@
   height: 40px;
   width: 100%;
 
-  border: 1px solid #000;
+  padding-left: 20px;
+
+  border: 1px solid #212122;
   border-radius: 5px;
+
+  /* background-color: #afe2ff; */
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+
+  color: #212121;
+}
+
+/* .input:focus {
+  border-color: #afe2ff;
+  outline: none;
+  background-color: #566873;
+}
+
+.input:focus-within .label {
+  color: #afe2ff;
+} */
+
+.input:focus::placeholder {
+  color: #afe2ff;
+}
+
+input:focus {
+  + label {
+    color: #afe2ff;
+  }
 }

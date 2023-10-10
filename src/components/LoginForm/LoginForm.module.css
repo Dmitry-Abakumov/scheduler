@@ -2,4 +2,18 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+
+  width: 400px;
+
+  padding: 50px 30px;
+
+  border: 1px solid #212121;
+  border-radius: 5px;
+
+  background-color: #566873;
+}
+
+.loginBtn {
+  margin-left: auto;
+  margin-right: auto;
 }

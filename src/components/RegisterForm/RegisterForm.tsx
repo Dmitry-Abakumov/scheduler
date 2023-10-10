@@ -2,6 +2,9 @@ import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 
+import TextField from "../../shared/components/TextField";
+import Button from "../../shared/components/Button";
+
 import { AnyAction } from "@reduxjs/toolkit";
 
 import { fetchLogin, fetchRegister } from "../../redux/auth/authOperations";
@@ -43,12 +46,12 @@ const RegisterForm = () => {
       }}
     >
       <Form className={css.form}>
-        <Field {...fields.login} className={css.input} />
-        <Field {...fields.email} className={css.input} />
-        <Field {...fields.password} className={css.input} />
-        <button type="submit" className={css.btn}>
+        <TextField {...fields.login} />
+        <TextField {...fields.email} />
+        <TextField {...fields.password} />
+        <Button type="submit" className={css.registerBtn}>
           Register
-        </button>
+        </Button>
       </Form>
     </Formik>
   );
