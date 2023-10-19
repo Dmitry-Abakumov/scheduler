@@ -36,3 +36,8 @@ export const getCurrent = async (token: string) => {
 
   return data;
 };
+
+export const logout = async () => {
+  await instance.put("auth/logout");
+  setToken("");
+};

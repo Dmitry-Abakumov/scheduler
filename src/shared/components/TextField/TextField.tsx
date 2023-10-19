@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 import { Field } from "formik";
+import { ReactNode } from "react";
 
 import css from "./TextField.module.css";
 
@@ -8,16 +9,20 @@ type Props = {
   type: string;
   label: string;
   placeholder: string;
+  children: ReactNode;
 };
 
-const TextField = ({ label, ...props }: Props) => {
+const TextField = ({ label, children, ...props }: Props) => {
   const id = nanoid();
   return (
     <div>
       <label htmlFor={id} className={css.label}>
         {label}
       </label>
-      <Field {...props} id={id} className={css.input} />
+      <div className={css.inputIconWrapper}>
+        <Field {...props} id={id} className={css.input} />
+        {children}
+      </div>
     </div>
   );
 };

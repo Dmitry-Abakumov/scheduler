@@ -1,4 +1,6 @@
 .navbarWrap {
+  position: relative;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,15 +8,39 @@
 
   padding: 15px 0px;
 
-  background-color: #566873;
+  background-color: #f6fbf9;
 }
 
 .menu {
   font-size: 20px;
-  color: #212121;
-  font-weight: 500;
+  color: #2a303c;
+  font-weight: 600;
+
+  transition: var(--transition-dur-and-func);
+}
+
+.logoIcon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+
+  transform: translate(0%, -50%);
+  color: #2a303c;
+
+  cursor: pointer;
+
+  transition: var(--transition-dur-and-func);
+}
+
+.logoIcon:hover,
+.logoIcon:focus-visible {
+  color: var(--accent-color);
+
+  transition: var(--transition-dur-and-func);
 }
 
 :global(.active) {
-  color: #afe2ff;
+  color: var(--accent-color);
+
+  transition: var(--transition-dur-and-func);
 }

@@ -1,12 +1,14 @@
 import LoginForm from "../../components/LoginForm";
 
+import Container from "../../shared/components/Container";
+
 import css from "./LoginPage.module.css";
 
 const LoginPage = () => {
   return (
-    <div className={css.pageWrapper}>
+    <Container className={css.pageWrapper}>
       <LoginForm />
-    </div>
+    </Container>
   );
 };
 

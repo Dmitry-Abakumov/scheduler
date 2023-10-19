@@ -1,6 +1,10 @@
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
+
+import { RiLockPasswordFill } from "react-icons/ri";
+import { RiMailFill } from "react-icons/ri";
+import { RiUser3Fill } from "react-icons/ri";
 
 import TextField from "../../shared/components/TextField";
 import Button from "../../shared/components/Button";
@@ -46,9 +50,16 @@ const RegisterForm = () => {
       }}
     >
       <Form className={css.form}>
-        <TextField {...fields.login} />
-        <TextField {...fields.email} />
-        <TextField {...fields.password} />
+        <TextField {...fields.login}>
+          <RiUser3Fill className={`commonIcon ${css.icon}`} />
+        </TextField>
+        <TextField {...fields.email}>
+          <RiMailFill className={`commonIcon ${css.icon}`} />
+        </TextField>
+        <TextField {...fields.password}>
+          <RiLockPasswordFill className={`commonIcon ${css.icon}`} />
+        </TextField>
+
         <Button type="submit" className={css.registerBtn}>
           Register
         </Button>

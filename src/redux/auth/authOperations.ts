@@ -67,3 +67,15 @@ export const fetchCurrent = createAsyncThunk(
     },
   }
 );
+
+export const fetchLogout = createAsyncThunk(
+  "auth/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      return await API.logout();
+    } catch (error) {
+      const { response } = error as AxiosError;
+      return rejectWithValue(response?.data);
+    }
+  }
+);

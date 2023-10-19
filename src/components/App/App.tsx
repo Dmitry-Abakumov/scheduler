@@ -7,8 +7,6 @@ import UserRoutes from "../../UserRoutes";
 
 import { fetchCurrent } from "../../redux/auth/authOperations";
 
-import css from "./App.module.css";
-
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
 
@@ -17,10 +15,10 @@ const App = () => {
   });
 
   return (
-    <div className={css.container}>
+    <>
       <Navbar />
       <UserRoutes />
-    </div>
+    </>
   );
 };
 

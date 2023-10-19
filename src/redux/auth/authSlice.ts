@@ -1,6 +1,6 @@
 import { AnyAction, createSlice } from "@reduxjs/toolkit";
 
-import { IUser, fetchCurrent, fetchLogin } from "./authOperations";
+import { IUser, fetchCurrent, fetchLogin, fetchLogout } from "./authOperations";
 
 import { fetchRegister } from "./authOperations";
 
@@ -72,7 +72,13 @@ const authSlice = createSlice({
         store.isLoggedIn = true;
         store.error = null;
       })
-      .addCase(fetchCurrent.rejected, handleRejected);
+      .addCase(fetchCurrent.rejected, handleRejected)
+
+      .addCase(fetchLogout.pending, handlePending)
+      .addCase(fetchLogout.fulfilled, () => {
+        return initialState;
+      })
+      .addCase(fetchLogout.rejected, handleRejected);
   },
 });
 
