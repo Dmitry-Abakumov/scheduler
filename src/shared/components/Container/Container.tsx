@@ -4,7 +4,7 @@ import css from "./Container.module.css";
 
 type Props = {
   children: ReactNode;
-  className: string;
+  className?: string;
 };
 
 const Container = ({ children, className }: Props) => {

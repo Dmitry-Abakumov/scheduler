@@ -6,9 +6,11 @@ import css from "./LoginPage.module.css";
 
 const LoginPage = () => {
   return (
-    <Container className={css.pageWrapper}>
-      <LoginForm />
-    </Container>
+    <div className={css.pageWrapper}>
+      <Container className={css.container}>
+        <LoginForm />
+      </Container>
+    </div>
   );
 };
 

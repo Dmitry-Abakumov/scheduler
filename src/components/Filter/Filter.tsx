@@ -5,7 +5,7 @@ import { AppDispatch } from "../../redux/store";
 
 import fields from "./fields";
 
-import getAndSetTasksByFilter from "../../shared/utils/getAndSetTasksByFilter";
+import { getAndSetTasksByFilter } from "../../shared/utils";
 
 import css from "./Filter.module.css";
 

@@ -4,7 +4,7 @@ import { getFilteredTasks } from "../services/tasks-api";
 
 import { ITask } from "../../Types";
 
-const getAndSetTasksByFilter = async (
+export const getAndSetTasksByFilter = async (
   filterOption: string,
   dispatch: AppDispatch
 ) => {
@@ -27,5 +27,3 @@ const getAndSetTasksByFilter = async (
     dispatch({ type: "setFilteredTasks", payload: data });
   } catch {}
 };
-
-export default getAndSetTasksByFilter;

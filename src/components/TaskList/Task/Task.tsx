@@ -3,7 +3,7 @@ import { AppDispatch } from "../../../redux/store";
 
 import { fetchDeleteTask } from "../../../redux/tasks/tasksOperations";
 
-import getAndSetTasksByFilter from "../../../shared/utils/getAndSetTasksByFilter";
+import { getAndSetTasksByFilter } from "../../../shared/utils";
 
 import { ITask } from "../../../Types";
 

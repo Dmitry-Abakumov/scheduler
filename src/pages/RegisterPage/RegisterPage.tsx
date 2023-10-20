@@ -6,9 +6,11 @@ import css from "./RegisterPage.module.css";
 
 const RegisterPage = () => {
   return (
-    <Container className={css.pageWrapper}>
-      <RegisterForm />
-    </Container>
+    <div className={css.pageWrapper}>
+      <Container className={css.container}>
+        <RegisterForm />
+      </Container>
+    </div>
   );
 };
 

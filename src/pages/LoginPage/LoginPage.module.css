@@ -1,9 +1,13 @@
 .pageWrapper {
+  background-image: url(../../shared/images/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  min-height: 800px;
+}
+
+.container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-
-  background-image: url(../../shared/images/background.jpg);
-
-  min-height: 800px;
 }
