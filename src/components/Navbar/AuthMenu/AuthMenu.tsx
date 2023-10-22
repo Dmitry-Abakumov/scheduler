@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 
-import css from "../Navbar.module.css";
+import css from "./AuthMenu.module.css";
 
 const AuthMenu = () => {
   return (
-    <div>
+    <div className={css.authContainer}>
       <NavLink to="/login" className={css.menu}>
         Login
       </NavLink>

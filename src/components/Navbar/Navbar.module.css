@@ -1,5 +1,7 @@
 .navbarWrap {
-  position: relative;
+  /* display: flex;
+  justify-content: center; */
+
   background-color: #f6fbf9;
   padding: 15px 0px;
 }
@@ -20,11 +22,6 @@
 }
 
 .logoIcon {
-  position: absolute;
-  top: 50%;
-  left: 15px;
-
-  transform: translate(0%, -50%);
   color: #2a303c;
 
   cursor: pointer;

@@ -1,0 +1,27 @@
+.heroWrapper {
+  max-width: 480px;
+  padding-top: 118px;
+  padding-bottom: 118px;
+  margin: 0 auto;
+
+  background-image: linear-gradient(
+      rgba(47, 48, 58, 0.4),
+      rgba(47, 48, 58, 0.4)
+    ),
+    url(../../shared/images/hero-bg.jpg);
+  background-size: cover;
+  background-position: center;
+
+  text-align: center;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heroTitle {
+  color: var(--primary-text-color);
+  text-align: center;
+
+  font-size: 40px;
+  font-weight: 700;
+}
