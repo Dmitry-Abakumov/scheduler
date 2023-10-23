@@ -13,7 +13,7 @@ const UserRoutes = () => {
   return (
     <Suspense>
       <Routes>
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
         <Route element={<PrivateRoute />}>
           <Route path="/tasks" element={<TaskPage />} />
         </Route>

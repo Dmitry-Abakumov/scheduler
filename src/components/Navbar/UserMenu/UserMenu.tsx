@@ -1,8 +1,7 @@
-import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 
-import Button from "../../../shared/components/Button";
+import useAuth from "../../../shared/hooks/useAuth";
 
 import { fetchLogout } from "../../../redux/auth/authOperations";
 
@@ -11,14 +10,21 @@ import css from "./UserMenu.module.css";
 const UserMenu = () => {
   const dispatch = useDispatch<AppDispatch>();
 
+  const { login } = useAuth();
+
   return (
-    <div>
-      <NavLink to="/tasks" className={css.menu}>
+    <div className={css.userMenuWrap}>
+      {/* <NavLink to="/tasks" className={css.menu}>
         Tasks
-      </NavLink>
-      <Button type="button" onClick={() => dispatch(fetchLogout())}>
+      </NavLink> */}
+      {login}
+      <button
+        type="button"
+        onClick={() => dispatch(fetchLogout())}
+        className={`${css.link} ${css.btnReset}`}
+      >
         Logout
-      </Button>
+      </button>
     </div>
   );
 };

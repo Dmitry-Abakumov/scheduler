@@ -5,10 +5,10 @@ import css from "./AuthMenu.module.css";
 const AuthMenu = () => {
   return (
     <div className={css.authContainer}>
-      <NavLink to="/login" className={css.menu}>
+      <NavLink to="/login" className={css.link}>
         Login
       </NavLink>
-      <NavLink to="/register" className={css.menu}>
+      <NavLink to="/register" className={css.link}>
         Register
       </NavLink>
     </div>

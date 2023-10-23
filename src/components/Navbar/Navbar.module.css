@@ -1,24 +1,29 @@
 .navbarWrap {
-  /* display: flex;
-  justify-content: center; */
-
   background-color: #f6fbf9;
   padding: 15px 0px;
+  width: 100%;
 }
 
 .container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   gap: 10px;
 }
 
-.menu {
+.link {
   font-size: 20px;
   color: #2a303c;
   font-weight: 600;
 
   transition: var(--transition-dur-and-func);
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .logoIcon {
