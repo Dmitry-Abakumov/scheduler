@@ -15,11 +15,6 @@ import fields from "./fields";
 
 import css from "./LoginForm.module.css";
 
-interface Values {
-  email: string;
-  password: string;
-}
-
 const initialFields = {
   email: "",
   password: "",
@@ -31,7 +26,7 @@ const LoginForm = () => {
   return (
     <Formik
       initialValues={initialFields}
-      onSubmit={(values: Values, { resetForm }) => {
+      onSubmit={(values, { resetForm }) => {
         dispatch(fetchLogin(values));
         resetForm();
       }}

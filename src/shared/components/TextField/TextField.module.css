@@ -43,4 +43,10 @@
 
 .inputIconWrapper {
   position: relative;
+
+  width: 100%;
+}
+
+.textFieldWrap {
+  width: 100%;
 }

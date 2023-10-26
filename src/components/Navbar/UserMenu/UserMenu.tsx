@@ -17,7 +17,7 @@ const UserMenu = () => {
       {/* <NavLink to="/tasks" className={css.menu}>
         Tasks
       </NavLink> */}
-      {login}
+      Welcome, {login}
       <button
         type="button"
         onClick={() => dispatch(fetchLogout())}

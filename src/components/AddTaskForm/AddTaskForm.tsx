@@ -1,36 +1,39 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import { Formik, Form } from "formik";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 
+import TextField from "../../shared/components/TextField";
+import Button from "../../shared/components/Button";
+
 import { fetchAddTask } from "../../redux/tasks/tasksOperations";
+
+import fields from "./fields";
 
 import css from "./AddTaskForm.module.css";
 
-const AddTaskForm = () => {
-  const [field, setField] = useState("");
+const initialFields = {
+  text: "",
+};
 
+const AddTaskForm = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const onSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    if (field.trim() === "") return;
-
-    dispatch(fetchAddTask({ text: field }));
-
-    setField("");
-  };
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setField(e.target.value);
-  };
   return (
-    <form className={css.form} onSubmit={onSubmit}>
-      <input onChange={onChange} type="text" value={field} />
-      <button className={css.button} type="submit">
-        Добавить задачу
-      </button>
-    </form>
+    <Formik
+      initialValues={initialFields}
+      onSubmit={(values, { resetForm }) => {
+        console.log(values);
+        dispatch(fetchAddTask(values));
+        resetForm();
+      }}
+    >
+      <Form className={css.form}>
+        <TextField {...fields.text}></TextField>
+        <Button type="submit" className={css.btn}>
+          Добавить задачу
+        </Button>
+      </Form>
+    </Formik>
   );
 };
 

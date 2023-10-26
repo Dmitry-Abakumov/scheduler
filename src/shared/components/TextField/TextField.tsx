@@ -9,13 +9,13 @@ type Props = {
   type: string;
   label: string;
   placeholder: string;
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 const TextField = ({ label, children, ...props }: Props) => {
   const id = nanoid();
   return (
-    <div>
+    <div className={css.textFieldWrap}>
       <label htmlFor={id} className={css.label}>
         {label}
       </label>
