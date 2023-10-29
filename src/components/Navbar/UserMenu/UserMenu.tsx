@@ -10,14 +10,14 @@ import css from "./UserMenu.module.css";
 const UserMenu = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { login } = useAuth();
+  // const { login } = useAuth();
 
   return (
     <div className={css.userMenuWrap}>
       {/* <NavLink to="/tasks" className={css.menu}>
         Tasks
       </NavLink> */}
-      Welcome, {login}
+      {/* Welcome, {login} */}
       <button
         type="button"
         onClick={() => dispatch(fetchLogout())}

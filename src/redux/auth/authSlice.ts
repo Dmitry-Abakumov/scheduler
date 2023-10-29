@@ -32,7 +32,6 @@ const handlePending = (store: IAuthStore) => {
 };
 
 const handleRejected = (store: IAuthStore, { payload }: AnyAction) => {
-  console.log("handleRejected");
   store.isLoading = false;
   store.error = payload;
   store.token = null;

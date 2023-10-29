@@ -9,7 +9,6 @@ export const getAndSetTasksByFilter = async (
   dispatch: AppDispatch
 ) => {
   if (filterOption === "all") {
-    console.log("all tasks request");
     try {
       const data: ITask[] = await getFilteredTasks();
 

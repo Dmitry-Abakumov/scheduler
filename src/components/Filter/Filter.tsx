@@ -1,7 +1,9 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { ChangeEvent, useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 
 import { AppDispatch } from "../../redux/store";
+
+import Options from "./Options";
 
 import fields from "./fields";
 
@@ -14,10 +16,21 @@ interface Props {
   setFilterOption: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Filter = ({ filterOption, setFilterOption }: Props) => {
-  const [isMenuShow, setIsMunuShow] = useState(false);
+const bodyRef = document.querySelector("body");
 
+const Filter = ({ filterOption, setFilterOption }: Props) => {
+  const [isOptionsShow, setIsOptionsShow] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
+
+  console.log(isOptionsShow);
+
+  const toggleOptions = useCallback(() => {
+    setIsOptionsShow((prev) => !prev);
+  }, []);
+
+  // useEffect(() => {
+  //   bodyRef?.addEventListener("click", toggleOptions);
+  // }, [toggleOptions]);
 
   const isOptionSelected = (option: string) => {
     return option === filterOption;
@@ -25,23 +38,21 @@ const Filter = ({ filterOption, setFilterOption }: Props) => {
 
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setFilterOption(value);
-    setIsMunuShow(false);
-
     getAndSetTasksByFilter(value, dispatch);
   };
 
+  // if (!isOptionsShow) bodyRef?.removeEventListener("click", toggleOptions);
+
   return (
-    <div className={css.filter}>
-      <div
-        className={css.currentOption}
-        onClick={() => setIsMunuShow((prev) => !prev)}
-      >
-        {filterOption}
-        <div className={isMenuShow ? `${css.labelWrapper}` : `${css.hide}`}>
-          <label htmlFor="all">all</label>
-          <label htmlFor="done">done</label>
-          <label htmlFor="in progress">in progress</label>
-        </div>
+    <>
+      <div className={css.filter} onClick={toggleOptions}>
+        <div className={css.currentOption}>{filterOption}</div>
+        {isOptionsShow && (
+          <Options
+            isOptionsShow={isOptionsShow}
+            toggleOptions={toggleOptions}
+          />
+        )}
       </div>
 
       <input
@@ -62,7 +73,7 @@ const Filter = ({ filterOption, setFilterOption }: Props) => {
         onChange={onChange}
         checked={isOptionSelected("in progress")}
       />
-    </div>
+    </>
   );
 };
 

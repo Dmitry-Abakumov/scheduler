@@ -22,7 +22,6 @@ const AddTaskForm = () => {
     <Formik
       initialValues={initialFields}
       onSubmit={(values, { resetForm }) => {
-        console.log(values);
         dispatch(fetchAddTask(values));
         resetForm();
       }}

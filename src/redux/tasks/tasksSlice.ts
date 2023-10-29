@@ -1,4 +1,4 @@
-import { createSlice, AnyAction, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, AnyAction } from "@reduxjs/toolkit";
 
 import {
   fetchAllTasks,
@@ -46,7 +46,6 @@ const tasksSlice = createSlice({
 
       .addCase(fetchDeleteTask.pending, handlePanding)
       .addCase(fetchDeleteTask.fulfilled, (store: ITasksStore, { payload }) => {
-        console.log(payload);
         const nextTasks = store.items.filter(({ _id }) => _id !== payload);
         store.items = nextTasks;
         store.isLoading = false;

@@ -3,10 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import useAuth from "../../shared/hooks/useAuth";
 
 const PrivateRoute = () => {
-  console.log("PrivateRoute");
   const { isLoggedIn, token } = useAuth();
-
-  console.log("isLoggedIn ", isLoggedIn, "token ", token);
 
   if (!isLoggedIn && token) {
     return <p>Loading...</p>;

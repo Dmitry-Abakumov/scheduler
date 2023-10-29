@@ -7,9 +7,9 @@
 
   width: 400px;
 
-  padding: 68px 63px;
+  padding: 70px 65px;
 
-  background-color: #f6fbf9;
+  background-color: var(--primary-bg-color);
 
   border-radius: 10px;
 }
@@ -22,7 +22,7 @@
 .icon {
   position: absolute;
   top: 50%;
-  left: 5px;
+  left: 8px;
 
   transform: translateY(-50%);
 }
