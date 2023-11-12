@@ -1,13 +1,11 @@
-import React, { ChangeEvent, useState, useEffect, useCallback } from "react";
-import { useDispatch } from "react-redux";
-
-import { AppDispatch } from "../../redux/store";
+import { Formik, Form, Field } from "formik";
+import { nanoid } from "nanoid";
+import { useState } from "react";
+import { MouseEvent } from "react";
 
 import Options from "./Options";
 
 import fields from "./fields";
-
-import { getAndSetTasksByFilter } from "../../shared/utils";
 
 import css from "./Filter.module.css";
 
@@ -16,64 +14,50 @@ interface Props {
   setFilterOption: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const bodyRef = document.querySelector("body");
-
 const Filter = ({ filterOption, setFilterOption }: Props) => {
   const [isOptionsShow, setIsOptionsShow] = useState(false);
-  const dispatch = useDispatch<AppDispatch>();
 
-  console.log(isOptionsShow);
-
-  const toggleOptions = useCallback(() => {
-    setIsOptionsShow((prev) => !prev);
-  }, []);
-
-  // useEffect(() => {
-  //   bodyRef?.addEventListener("click", toggleOptions);
-  // }, [toggleOptions]);
-
-  const isOptionSelected = (option: string) => {
-    return option === filterOption;
-  };
-
-  const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    setFilterOption(value);
-    getAndSetTasksByFilter(value, dispatch);
-  };
-
-  // if (!isOptionsShow) bodyRef?.removeEventListener("click", toggleOptions);
+  // const allOptionId = nanoid();
+  // const doneOptionId = nanoid();
+  // const inProgressOptionId = nanoid();
 
   return (
+    // <Formik initialValues={{ option: "in progress" }} onSubmit={() => {}}>
     <>
-      <div className={css.filter} onClick={toggleOptions}>
-        <div className={css.currentOption}>{filterOption}</div>
-        {isOptionsShow && (
-          <Options
-            isOptionsShow={isOptionsShow}
-            toggleOptions={toggleOptions}
-          />
-        )}
+      {/* <div className={css.filter}> */}
+      <div
+        className={css.filter}
+        onClick={(e: MouseEvent<HTMLDivElement>) => {
+          setIsOptionsShow((prev) => !prev);
+
+          e.stopPropagation();
+        }}
+      >
+        {filterOption}
+        <form className={isOptionsShow ? css.form : `${css.form} ${css.hide}`}>
+          {isOptionsShow && (
+            <Options
+              filterOption={filterOption}
+              setFilterOption={setFilterOption}
+              setIsOptionsShow={setIsOptionsShow}
+              isOptionsShow={isOptionsShow}
+              // allOptionId={allOptionId}
+              // doneOptionId={doneOptionId}
+              // inProgressOptionId={inProgressOptionId}
+            />
+          )}
+
+          {/* <input name="option" type="radio" value="all" id="all" />
+            <input name="option" type="radio" value="done" id="done" />
+            <input {...fields.inProgress} id="inProgress" /> */}
+          <input name="test" value="1" type="radio" id="1" />
+          <input name="test" value="2" type="radio" id="2" />
+        </form>
       </div>
 
-      <input
-        {...fields.all}
-        className={css.hide}
-        onChange={onChange}
-        checked={isOptionSelected("all")}
-      />
-      <input
-        {...fields.done}
-        className={css.hide}
-        onChange={onChange}
-        checked={isOptionSelected("done")}
-      />
-      <input
-        {...fields.inProgress}
-        className={css.hide}
-        onChange={onChange}
-        checked={isOptionSelected("in progress")}
-      />
+      {/* </div> */}
     </>
+    // </Formik>
   );
 };
 

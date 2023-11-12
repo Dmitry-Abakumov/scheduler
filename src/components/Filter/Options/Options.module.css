@@ -1,6 +1,6 @@
-/* .hide {
+.hide {
   display: none;
-} */
+}
 
 .label {
   display: flex;
@@ -18,7 +18,7 @@
     position: relative;
   } */
 
-.labelWrapper {
+.optionsWrap {
   position: absolute;
   top: 20px;
   left: 50%;

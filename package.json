@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.5",
-    "@types/yup": "^0.32.0",
     "axios": "^1.5.0",
     "formik": "^2.4.5",
     "nanoid": "^4.0.2",
@@ -21,6 +19,8 @@
     "react-icons": "^4.11.0"
   },
   "devDependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "@types/yup": "^0.32.0",
     "@types/node": "^16.18.48",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
@@ -30,7 +30,7 @@
     "@types/redux-persist": "^4.3.1"
   },
   "scripts": {
-    "start": "set PORT=3006 && react-scripts start",
+    "start": "set PORT=3007 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
