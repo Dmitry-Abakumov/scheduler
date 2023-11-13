@@ -27,9 +27,6 @@
 .filter {
   position: relative;
 
-  display: flex;
-  justify-content: center;
-
   width: 150px;
 
   padding: 5px 0px;
@@ -41,4 +38,12 @@
   color: var(--primary-text-color);
 
   cursor: pointer;
+}
+
+.currentOption {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
 }

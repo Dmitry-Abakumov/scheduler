@@ -1,9 +1,11 @@
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { Formik, Form, Field } from "formik";
-import { nanoid } from "nanoid";
 import { useState } from "react";
 import { MouseEvent } from "react";
+import { AppDispatch } from "../../redux/store";
 
-import Options from "./Options";
+import { getAndSetTasksByFilter } from "../../shared/utils";
 
 import fields from "./fields";
 
@@ -14,50 +16,88 @@ interface Props {
   setFilterOption: React.Dispatch<React.SetStateAction<string>>;
 }
 
+const bodyRef = document.querySelector("body");
+
 const Filter = ({ filterOption, setFilterOption }: Props) => {
   const [isOptionsShow, setIsOptionsShow] = useState(false);
 
-  // const allOptionId = nanoid();
-  // const doneOptionId = nanoid();
-  // const inProgressOptionId = nanoid();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const onEscapePress = useCallback((e: any) => {
+    if (e.code !== "Escape") return;
+
+    setIsOptionsShow((prev) => !prev);
+  }, []);
+
+  const toggleOption = useCallback(() => {
+    setIsOptionsShow((prev) => !prev);
+  }, []);
+
+  const addBodyListeners = useCallback(() => {
+    bodyRef?.addEventListener("click", toggleOption);
+    document.addEventListener("keydown", onEscapePress);
+  }, [onEscapePress, toggleOption]);
+
+  const removeBodyListeners = useCallback(() => {
+    bodyRef?.removeEventListener("click", toggleOption);
+    document.removeEventListener("keydown", onEscapePress);
+  }, [toggleOption, onEscapePress]);
+
+  const handleChange = (option: string) => {
+    console.log(option);
+    getAndSetTasksByFilter(option, dispatch);
+
+    setIsOptionsShow((prev) => !prev);
+  };
+
+  isOptionsShow ? addBodyListeners() : removeBodyListeners();
 
   return (
-    // <Formik initialValues={{ option: "in progress" }} onSubmit={() => {}}>
-    <>
-      {/* <div className={css.filter}> */}
-      <div
-        className={css.filter}
-        onClick={(e: MouseEvent<HTMLDivElement>) => {
-          setIsOptionsShow((prev) => !prev);
+    <div
+      className={css.filter}
+      onClick={(e: MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation();
+      }}
+    >
+      <Formik initialValues={{ option: "all" }} onSubmit={() => {}}>
+        {({ values: { option } }) => {
+          return (
+            <>
+              <div
+                onClick={(e: MouseEvent<HTMLDivElement>) => {
+                  toggleOption();
 
-          e.stopPropagation();
+                  e.stopPropagation();
+                }}
+                className={css.currentOption}
+              >
+                {option}
+              </div>
+              <Form
+                className={isOptionsShow ? css.form : `${css.form} ${css.hide}`}
+              >
+                <label htmlFor="all" className={css.label}>
+                  all
+                </label>
+                <label htmlFor="done" className={css.label}>
+                  done
+                </label>
+                <label htmlFor="inProgress" className={css.label}>
+                  in progress
+                </label>
+
+                <Field {...fields.all} onChange={() => handleChange(option)} />
+                <Field {...fields.done} onChange={() => handleChange(option)} />
+                <Field
+                  {...fields.inProgress}
+                  onChange={() => handleChange(option)}
+                />
+              </Form>
+            </>
+          );
         }}
-      >
-        {filterOption}
-        <form className={isOptionsShow ? css.form : `${css.form} ${css.hide}`}>
-          {isOptionsShow && (
-            <Options
-              filterOption={filterOption}
-              setFilterOption={setFilterOption}
-              setIsOptionsShow={setIsOptionsShow}
-              isOptionsShow={isOptionsShow}
-              // allOptionId={allOptionId}
-              // doneOptionId={doneOptionId}
-              // inProgressOptionId={inProgressOptionId}
-            />
-          )}
-
-          {/* <input name="option" type="radio" value="all" id="all" />
-            <input name="option" type="radio" value="done" id="done" />
-            <input {...fields.inProgress} id="inProgress" /> */}
-          <input name="test" value="1" type="radio" id="1" />
-          <input name="test" value="2" type="radio" id="2" />
-        </form>
-      </div>
-
-      {/* </div> */}
-    </>
-    // </Formik>
+      </Formik>
+    </div>
   );
 };
 

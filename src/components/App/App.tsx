@@ -16,11 +16,11 @@ const App = () => {
   });
 
   return (
-    // <>
-    //   <Navbar />
-    //   <UserRoutes />
-    // </>
-    <TestComponent />
+    <>
+      <Navbar />
+      <UserRoutes />
+    </>
+    // <TestComponent />
   );
 };
 

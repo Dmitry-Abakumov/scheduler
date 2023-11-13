@@ -20,8 +20,6 @@ type Props = {
   // inProgressOptionId: string;
 };
 
-const bodyRef = document.querySelector("body");
-
 const Options = ({
   setFilterOption,
   setIsOptionsShow,
@@ -30,32 +28,6 @@ const Options = ({
 // inProgressOptionId,
 Props) => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const toggleOptions = useCallback(
-    (e: any) => {
-      setIsOptionsShow((prev) => !prev);
-    },
-    [setIsOptionsShow]
-  );
-
-  const onEscapePress = useCallback(
-    (e: any) => {
-      if (e.code !== "Escape") return;
-
-      toggleOptions(e);
-    },
-    [toggleOptions]
-  );
-
-  const addBodyListeners = useCallback(() => {
-    bodyRef?.addEventListener("click", toggleOptions);
-    document.addEventListener("keydown", onEscapePress);
-  }, [onEscapePress, toggleOptions]);
-
-  const removeBodyListeners = useCallback(() => {
-    bodyRef?.removeEventListener("click", toggleOptions);
-    document.removeEventListener("keydown", onEscapePress);
-  }, [onEscapePress, toggleOptions]);
 
   // useEffect(() => {
   //   addBodyListeners();
@@ -69,16 +41,7 @@ Props) => {
 
   return (
     <>
-      {/* <label htmlFor="all" className={css.label}>
-        all
-      </label>
-      <label htmlFor="done" className={css.label}>
-        done
-      </label>
-      <label htmlFor="inProgress" className={css.label}>
-        in progress
-      </label> */}
-      <label
+      {/* <label
         htmlFor="1"
         onClick={(e: MouseEvent<HTMLLabelElement>) => {
           setIsOptionsShow((prev) => !prev);
@@ -97,7 +60,7 @@ Props) => {
         }}
       >
         2
-      </label>
+      </label> */}
     </>
   );
 };

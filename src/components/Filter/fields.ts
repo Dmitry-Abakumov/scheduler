@@ -3,16 +3,19 @@ const fields = {
     type: "radio",
     name: "option",
     value: "all",
+    id: "all",
   },
   done: {
     type: "radio",
     name: "option",
     value: "done",
+    id: "done",
   },
   inProgress: {
     type: "radio",
     name: "option",
-    value: "in progress",
+    value: "inProgress",
+    id: "inProgress",
   },
 };
 
