@@ -1,6 +1,5 @@
-import { useCallback } from "react";
+import { ChangeEvent, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { Formik, Form, Field } from "formik";
 import { useState } from "react";
 import { MouseEvent } from "react";
 import { AppDispatch } from "../../redux/store";
@@ -43,9 +42,12 @@ const Filter = ({ filterOption, setFilterOption }: Props) => {
     document.removeEventListener("keydown", onEscapePress);
   }, [toggleOption, onEscapePress]);
 
-  const handleChange = (option: string) => {
-    console.log(option);
-    getAndSetTasksByFilter(option, dispatch);
+  const handleChange = ({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>) => {
+    setFilterOption(value);
+
+    getAndSetTasksByFilter(value, dispatch);
 
     setIsOptionsShow((prev) => !prev);
   };
@@ -59,44 +61,46 @@ const Filter = ({ filterOption, setFilterOption }: Props) => {
         e.stopPropagation();
       }}
     >
-      <Formik initialValues={{ option: "all" }} onSubmit={() => {}}>
-        {({ values: { option } }) => {
-          return (
-            <>
-              <div
-                onClick={(e: MouseEvent<HTMLDivElement>) => {
-                  toggleOption();
+      <div
+        onClick={(e: MouseEvent<HTMLDivElement>) => {
+          toggleOption();
 
-                  e.stopPropagation();
-                }}
-                className={css.currentOption}
-              >
-                {option}
-              </div>
-              <Form
-                className={isOptionsShow ? css.form : `${css.form} ${css.hide}`}
-              >
-                <label htmlFor="all" className={css.label}>
-                  all
-                </label>
-                <label htmlFor="done" className={css.label}>
-                  done
-                </label>
-                <label htmlFor="inProgress" className={css.label}>
-                  in progress
-                </label>
-
-                <Field {...fields.all} onChange={() => handleChange(option)} />
-                <Field {...fields.done} onChange={() => handleChange(option)} />
-                <Field
-                  {...fields.inProgress}
-                  onChange={() => handleChange(option)}
-                />
-              </Form>
-            </>
-          );
+          e.stopPropagation();
         }}
-      </Formik>
+        className={css.currentOption}
+      >
+        {filterOption}
+      </div>
+      <form className={isOptionsShow ? css.form : `${css.form} ${css.hide}`}>
+        <label htmlFor="all" className={css.label}>
+          all
+        </label>
+        <label htmlFor="done" className={css.label}>
+          done
+        </label>
+        <label htmlFor="inProgress" className={css.label}>
+          in progress
+        </label>
+
+        <input
+          {...fields.all}
+          onChange={handleChange}
+          checked={filterOption === "all"}
+          className={css.hide}
+        />
+        <input
+          {...fields.done}
+          onChange={handleChange}
+          checked={filterOption === "done"}
+          className={css.hide}
+        />
+        <input
+          {...fields.inProgress}
+          onChange={handleChange}
+          checked={filterOption === "inProgress"}
+          className={css.hide}
+        />
+      </form>
     </div>
   );
 };

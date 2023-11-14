@@ -34,8 +34,9 @@ const TaskPage = () => {
           <AddTaskForm />
         </Container>
       </section>
-
-      <TaskList filterOption={filterOption} />
+      <section>
+        <TaskList filterOption={filterOption} />
+      </section>
     </div>
   );
 };

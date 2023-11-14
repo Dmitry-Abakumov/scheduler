@@ -6,7 +6,6 @@ import Navbar from "../Navbar";
 import UserRoutes from "../../UserRoutes";
 
 import { fetchCurrent } from "../../redux/auth/authOperations";
-import TestComponent from "../TestComponent";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -20,7 +19,6 @@ const App = () => {
       <Navbar />
       <UserRoutes />
     </>
-    // <TestComponent />
   );
 };
 

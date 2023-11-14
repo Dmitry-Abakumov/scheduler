@@ -10,13 +10,9 @@ export const getAllTasks = async () => {
   return data;
 };
 
-export const getFilteredTasks = async (filterOption?: { done: boolean }) => {
+export const getFilteredTasks = async (filterOption: string) => {
   const { data } = await instance.get(
-    `/tasks${
-      filterOption
-        ? `?${Object.keys(filterOption)[0]}=${filterOption.done}`
-        : ""
-    }`
+    `/tasks${filterOption === "done" ? `?done=true` : "?done=false"}`
   );
 
   return data;
