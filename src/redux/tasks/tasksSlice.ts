@@ -53,13 +53,13 @@ const tasksSlice = createSlice({
       })
       .addCase(fetchDeleteTask.rejected, handleRejected)
 
-      .addCase(fetchAddTask.pending, handlePanding)
-      .addCase(fetchAddTask.fulfilled, (store: ITasksStore, { payload }) => {
-        store.items.push(payload as ITask);
-        store.isLoading = false;
-        store.error = null;
-      })
-      .addCase(fetchAddTask.rejected, handleRejected)
+      // .addCase(fetchAddTask.pending, handlePanding)
+      // .addCase(fetchAddTask.fulfilled, (store: ITasksStore, { payload }) => {
+      //   store.items.push(payload as ITask);
+      //   store.isLoading = false;
+      //   store.error = null;
+      // })
+      // .addCase(fetchAddTask.rejected, handleRejected)
 
       .addCase(fetchUpdateDone.pending, handlePanding)
       .addCase(fetchUpdateDone.fulfilled, (store: ITasksStore, { payload }) => {

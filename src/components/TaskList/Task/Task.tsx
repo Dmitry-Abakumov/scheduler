@@ -1,6 +1,9 @@
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 
+import Checkbox from "../../../shared/components/Checkbox";
+import Button from "../../../shared/components/Button";
+
 import { fetchDeleteTask } from "../../../redux/tasks/tasksOperations";
 
 import { getAndSetTasksByFilter } from "../../../shared/utils";
@@ -28,13 +31,16 @@ const Task = ({ text, _id, done, filterOption }: Props) => {
   };
 
   return (
-    <div className={css.taskWrap}>
-      <p>{text}</p>
-      <input type="checkbox" checked={done} onChange={onChackboxChange} />
-      <button type="button" onClick={onDeleteBtnClick}>
-        delete
-      </button>
-    </div>
+    <li className={css.taskWrap}>
+      <p className={css.text}>{text}</p>
+
+      <div className={css.inputBtnWrap}>
+        <Checkbox checked={done} onCheckboxChange={onChackboxChange} />
+        <Button type="button" onClick={onDeleteBtnClick} className={css.btn}>
+          delete
+        </Button>
+      </div>
+    </li>
   );
 };
 

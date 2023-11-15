@@ -31,7 +31,7 @@ const TaskPage = () => {
             filterOption={filterOption}
             setFilterOption={setFilterOption}
           />
-          <AddTaskForm />
+          <AddTaskForm filterOption={filterOption} />
         </Container>
       </section>
       <section>

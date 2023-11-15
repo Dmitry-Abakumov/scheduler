@@ -1,6 +1,33 @@
 .taskWrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+
+  width: 500px;
+
+  padding: 5px;
+
+  border: 1px solid var(--secondary-text-color);
+  border-radius: 11px;
+}
+
+.inputBtnWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.text {
+  text-align: center;
+
+  color: var(--primary-text-color);
+  font-size: 16px;
+
+  width: 100%;
+}
+
+.btn {
+  font-size: 16px;
 }
