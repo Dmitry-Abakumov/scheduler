@@ -32,7 +32,9 @@ const Task = ({ text, _id, done, filterOption }: Props) => {
 
   return (
     <li className={css.taskWrap}>
-      <p className={css.text}>{text}</p>
+      <p className={done ? `${css.text} ${css.checkedText}` : `${css.text}`}>
+        {text}
+      </p>
 
       <div className={css.inputBtnWrap}>
         <Checkbox checked={done} onCheckboxChange={onChackboxChange} />

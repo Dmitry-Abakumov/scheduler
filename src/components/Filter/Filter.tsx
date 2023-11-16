@@ -4,6 +4,9 @@ import { useState } from "react";
 import { MouseEvent } from "react";
 import { AppDispatch } from "../../redux/store";
 
+import { IoMdArrowDropdown } from "react-icons/io";
+import { FaCircleDot } from "react-icons/fa6";
+
 import { getAndSetTasksByFilter } from "../../shared/utils";
 
 import fields from "./fields";
@@ -70,16 +73,22 @@ const Filter = ({ filterOption, setFilterOption }: Props) => {
         className={css.currentOption}
       >
         {filterOption}
+        <IoMdArrowDropdown size="20" className={css.icon} />
       </div>
       <form className={isOptionsShow ? css.form : `${css.form} ${css.hide}`}>
         <label htmlFor="all" className={css.label}>
-          all
+          <FaCircleDot size="12" className={css.icon} />
+          <div className={css.labelText}>
+            <div className={css.labelText}>all</div>
+          </div>
         </label>
         <label htmlFor="done" className={css.label}>
-          done
+          <FaCircleDot size="12" className={css.icon} />
+          <div className={css.labelText}>done</div>
         </label>
         <label htmlFor="inProgress" className={css.label}>
-          in progress
+          <FaCircleDot size="12" className={css.icon} />
+          <div className={css.labelText}>in progress</div>
         </label>
 
         <input
