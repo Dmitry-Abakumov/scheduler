@@ -5,7 +5,7 @@ import { AppDispatch } from "../../redux/store";
 
 import AddTaskForm from "../../components/AddTaskForm";
 import TaskList from "../../components/TaskList/TaskList";
-import Filter from "../../components/Filter";
+import FilterBar from "../../components/FilterBar";
 import Container from "../../shared/components/Container";
 
 import { fetchAllTasks } from "../../redux/tasks/tasksOperations";
@@ -27,7 +27,7 @@ const TaskPage = () => {
     <div className={css.pageWrapper}>
       <section className={css.taskControlsWrap}>
         <Container className={css.container}>
-          <Filter
+          <FilterBar
             filterOption={filterOption}
             setFilterOption={setFilterOption}
           />

@@ -2,12 +2,12 @@ import { ChangeEvent, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { MouseEvent } from "react";
-import { AppDispatch } from "../../redux/store";
+import { AppDispatch } from "../../../redux/store";
 
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaCircleDot } from "react-icons/fa6";
 
-import { getAndSetTasksByFilter } from "../../shared/utils";
+import { getAndSetTasksByFilter } from "../../../shared/utils";
 
 import fields from "./fields";
 
@@ -86,6 +86,7 @@ const Filter = ({ filterOption, setFilterOption }: Props) => {
           <FaCircleDot size="12" className={css.icon} />
           <div className={css.labelText}>done</div>
         </label>
+
         <label htmlFor="inProgress" className={css.label}>
           <FaCircleDot size="12" className={css.icon} />
           <div className={css.labelText}>in progress</div>

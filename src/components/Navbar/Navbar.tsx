@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { SiTodoist } from "react-icons/si";
 
 import UserMenu from "./UserMenu";
@@ -28,9 +28,9 @@ const Navbar = () => {
   return (
     <div className={css.navbarWrap}>
       <Container className={css.container}>
-        <NavLink to="/">
+        <Link to="/">
           <SiTodoist size="20px" className={css.logoIcon} />
-        </NavLink>
+        </Link>
         {<ul className={css.menu}>{elements}</ul>}
         {isLoggedIn && <UserMenu />}
         {!isLoggedIn && <AuthMenu />}

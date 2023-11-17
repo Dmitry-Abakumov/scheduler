@@ -7,8 +7,8 @@ import css from "./TextField.module.css";
 type Props = {
   name: string;
   type: string;
-  label: string;
-  placeholder: string;
+  label?: string;
+  placeholder?: string;
   children?: ReactNode;
 };
 
