@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 import { Field } from "formik";
-import { ReactNode } from "react";
+import { ChangeEvent, ReactNode } from "react";
 
 import css from "./TextField.module.css";
 
@@ -9,6 +9,7 @@ type Props = {
   type: string;
   label?: string;
   placeholder?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   children?: ReactNode;
 };
 

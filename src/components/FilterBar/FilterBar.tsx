@@ -1,18 +1,20 @@
 import Filter from "./Filter/Filter";
+import SearchTaskForm from "./SearchTaskForm";
+
+import { ITask } from "../../Types";
 
 type Props = {
-  filterOption: string;
-  setFilterOption: React.Dispatch<React.SetStateAction<string>>;
+  filterOption: "all" | "done" | "inProgress";
+  setFilterOption: React.Dispatch<
+    React.SetStateAction<"all" | "done" | "inProgress">
+  >;
 };
 
-const FilterBar = ({ ...props }: Props) => {
+const FilterBar = ({ filterOption, setFilterOption }: Props) => {
   return (
     <>
-      <section>
-        <hr />
-        <Filter {...props} />
-        <hr />
-      </section>
+      <Filter filterOption={filterOption} setFilterOption={setFilterOption} />
+      <SearchTaskForm filterOption={filterOption} />
     </>
   );
 };

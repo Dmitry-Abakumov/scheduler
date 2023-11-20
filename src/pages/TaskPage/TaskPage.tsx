@@ -10,10 +10,14 @@ import Container from "../../shared/components/Container";
 
 import { fetchAllTasks } from "../../redux/tasks/tasksOperations";
 
+import { ITask } from "../../Types";
+
 import css from "./TaskPage.module.css";
 
 const TaskPage = () => {
-  const [filterOption, setFilterOption] = useState("all");
+  const [filterOption, setFilterOption] = useState<
+    "all" | "done" | "inProgress"
+  >("all");
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -25,17 +29,25 @@ const TaskPage = () => {
 
   return (
     <div className={css.pageWrapper}>
-      <section className={css.taskControlsWrap}>
-        <Container className={css.container}>
+      <hr className={css.line} />
+      <section className={css.filterBarWrap}>
+        <Container>
           <FilterBar
             filterOption={filterOption}
             setFilterOption={setFilterOption}
           />
+        </Container>
+      </section>
+      <hr className={css.line} />
+      <section className={css.taskControlsWrap}>
+        <Container className={css.container}>
           <AddTaskForm filterOption={filterOption} />
         </Container>
       </section>
       <section>
-        <TaskList filterOption={filterOption} />
+        <Container>
+          <TaskList filterOption={filterOption} />
+        </Container>
       </section>
     </div>
   );

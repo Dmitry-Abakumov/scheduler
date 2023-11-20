@@ -6,8 +6,11 @@ import { AppDispatch } from "../../../redux/store";
 
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaCircleDot } from "react-icons/fa6";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowUp } from "react-icons/md";
+import { ImCheckmark } from "react-icons/im";
 
-import { getAndSetTasksByFilter } from "../../../shared/utils";
+import { getTasksByFilter } from "../../../shared/utils";
 
 import fields from "./fields";
 
@@ -15,7 +18,9 @@ import css from "./Filter.module.css";
 
 interface Props {
   filterOption: string;
-  setFilterOption: React.Dispatch<React.SetStateAction<string>>;
+  setFilterOption: React.Dispatch<
+    React.SetStateAction<"all" | "done" | "inProgress">
+  >;
 }
 
 const bodyRef = document.querySelector("body");
@@ -45,14 +50,20 @@ const Filter = ({ filterOption, setFilterOption }: Props) => {
     document.removeEventListener("keydown", onEscapePress);
   }, [toggleOption, onEscapePress]);
 
-  const handleChange = ({
+  const handleChange = async ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => {
-    setFilterOption(value);
+    setFilterOption(value as "all" | "done" | "inProgress");
 
-    getAndSetTasksByFilter(value, dispatch);
+    const filteredTasks = await getTasksByFilter(value);
+
+    dispatch({ type: "setFilteredTasks", payload: filteredTasks });
 
     setIsOptionsShow((prev) => !prev);
+  };
+
+  const isOptionChecked = (option: "all" | "done" | "inProgress") => {
+    return filterOption === option;
   };
 
   isOptionsShow ? addBodyListeners() : removeBodyListeners();
@@ -73,41 +84,70 @@ const Filter = ({ filterOption, setFilterOption }: Props) => {
         className={css.currentOption}
       >
         {filterOption}
-        <IoMdArrowDropdown size="20" className={css.icon} />
+        {isOptionsShow ? (
+          <MdKeyboardArrowUp size="22" className={css.icon} />
+        ) : (
+          <MdKeyboardArrowDown size="22" className={css.icon} />
+        )}
       </div>
       <form className={isOptionsShow ? css.form : `${css.form} ${css.hide}`}>
-        <label htmlFor="all" className={css.label}>
-          <FaCircleDot size="12" className={css.icon} />
-          <div className={css.labelText}>
-            <div className={css.labelText}>all</div>
-          </div>
+        <label
+          htmlFor="all"
+          className={
+            isOptionChecked("all")
+              ? `${css.label} ${css.checkedLabel}`
+              : css.label
+          }
+        >
+          <p>all</p>
+          {isOptionChecked("all") && (
+            <ImCheckmark size="12" className={css.icon} />
+          )}
         </label>
-        <label htmlFor="done" className={css.label}>
-          <FaCircleDot size="12" className={css.icon} />
-          <div className={css.labelText}>done</div>
+        <label
+          htmlFor="done"
+          className={
+            isOptionChecked("done")
+              ? `${css.label} ${css.checkedLabel}`
+              : css.label
+          }
+        >
+          <p>done</p>
+          {isOptionChecked("done") && (
+            <ImCheckmark size="12" className={css.icon} />
+          )}
         </label>
 
-        <label htmlFor="inProgress" className={css.label}>
-          <FaCircleDot size="12" className={css.icon} />
-          <div className={css.labelText}>in progress</div>
+        <label
+          htmlFor="inProgress"
+          className={
+            isOptionChecked("inProgress")
+              ? `${css.label} ${css.checkedLabel}`
+              : css.label
+          }
+        >
+          <p>in progress</p>
+          {isOptionChecked("inProgress") && (
+            <ImCheckmark size="12" className={css.icon} />
+          )}
         </label>
 
         <input
           {...fields.all}
           onChange={handleChange}
-          checked={filterOption === "all"}
+          checked={isOptionChecked("all")}
           className={css.hide}
         />
         <input
           {...fields.done}
           onChange={handleChange}
-          checked={filterOption === "done"}
+          checked={isOptionChecked("done")}
           className={css.hide}
         />
         <input
           {...fields.inProgress}
           onChange={handleChange}
-          checked={filterOption === "inProgress"}
+          checked={isOptionChecked("inProgress")}
           className={css.hide}
         />
       </form>

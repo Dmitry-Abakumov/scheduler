@@ -25,3 +25,13 @@
 
   background-color: var(--primary-bg-color);
 }
+
+.filterBarWrap {
+  padding: 15px 0px;
+
+  background-color: var(--primary-bg-color);
+}
+
+.line {
+  border-top: 1px solid var(--secondary-text-color);
+}

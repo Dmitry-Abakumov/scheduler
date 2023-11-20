@@ -6,7 +6,7 @@ import Button from "../../../shared/components/Button";
 
 import { fetchDeleteTask } from "../../../redux/tasks/tasksOperations";
 
-import { getAndSetTasksByFilter } from "../../../shared/utils";
+import { getTasksByFilter } from "../../../shared/utils";
 
 import { ITask } from "../../../Types";
 
@@ -27,7 +27,9 @@ const Task = ({ text, _id, done, filterOption }: Props) => {
   const onChackboxChange = async () => {
     await dispatch(fetchUpdateDone({ _id, data: { done: !done } }));
 
-    getAndSetTasksByFilter(filterOption, dispatch);
+    const filteredTasks = await getTasksByFilter(filterOption);
+
+    dispatch({ type: "setFilteredTasks", payload: filteredTasks });
   };
 
   return (

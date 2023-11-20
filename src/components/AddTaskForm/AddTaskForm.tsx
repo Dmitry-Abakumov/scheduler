@@ -9,9 +9,9 @@ import Button from "../../shared/components/Button";
 
 import fields from "./fields";
 
-import { addTask } from "../../shared/services/tasks-api";
+import { addTask, getFilteredTasks } from "../../shared/services/tasks-api";
 
-import { getAndSetTasksByFilter } from "../../shared/utils";
+import { getTasksByFilter } from "../../shared/utils";
 
 import css from "./AddTaskForm.module.css";
 
@@ -32,7 +32,9 @@ const AddTaskForm = ({ filterOption }: Props) => {
       onSubmit={async (values, { resetForm }) => {
         // await dispatch(fetchAddTask(values));
         await addTask(values);
-        await getAndSetTasksByFilter(filterOption, dispatch);
+        const filteredTasks = await getTasksByFilter(filterOption);
+
+        dispatch({ type: "setFilteredTasks", payload: filteredTasks });
 
         resetForm();
       }}
