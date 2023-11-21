@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { AppDispatch } from "../../redux/store";
 
@@ -9,6 +9,8 @@ import FilterBar from "../../components/FilterBar";
 import Container from "../../shared/components/Container";
 
 import { fetchAllTasks } from "../../redux/tasks/tasksOperations";
+
+import { getTasks } from "../../redux/tasks/taskSelectors";
 
 import { ITask } from "../../Types";
 
@@ -20,6 +22,7 @@ const TaskPage = () => {
   >("all");
 
   const dispatch = useDispatch<AppDispatch>();
+  const tasks = useSelector(getTasks);
 
   useEffect(() => {
     (async () => {
@@ -39,16 +42,18 @@ const TaskPage = () => {
         </Container>
       </section>
       <hr className={css.line} />
-      <section className={css.taskControlsWrap}>
+      <section className={css.addTaskFormSection}>
         <Container className={css.container}>
           <AddTaskForm filterOption={filterOption} />
         </Container>
       </section>
-      <section>
-        <Container>
-          <TaskList filterOption={filterOption} />
-        </Container>
-      </section>
+      {tasks.length > 0 && (
+        <section className={css.taskSection}>
+          <Container>
+            <TaskList filterOption={filterOption} />
+          </Container>
+        </section>
+      )}
     </div>
   );
 };

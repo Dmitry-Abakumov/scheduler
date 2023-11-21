@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
 import TextField from "../../../shared/components/TextField";
+import { debounce } from "lodash";
 
 import { AppDispatch } from "../../../redux/store";
 
@@ -39,18 +40,19 @@ const SearchTaskForm = ({ filterOption }: Props) => {
             name="taskSearch"
             type="text"
             placeholder="Search"
-            onChange={async ({
-              target: { value },
-            }: ChangeEvent<HTMLInputElement>) => {
-              setFieldValue("filter", value);
+            onChange={debounce(
+              async ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+                setFieldValue("filter", value);
 
-              const filteredTasks = await getTasksByFilter(filterOption);
+                const filteredTasks = await getTasksByFilter(filterOption);
 
-              dispatch({
-                type: "setFilteredTasks",
-                payload: getTasksBySerch(filteredTasks, value),
-              });
-            }}
+                dispatch({
+                  type: "setFilteredTasks",
+                  payload: getTasksBySerch(filteredTasks, value),
+                });
+              },
+              300
+            )}
           />
         </Form>
       )}

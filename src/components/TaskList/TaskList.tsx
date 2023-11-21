@@ -14,25 +14,17 @@ const TaskList = ({ filterOption }: Props) => {
   const tasks = useSelector(getTasks);
 
   return (
-    <section className={css.section}>
-      <ul
-        className={
-          tasks?.length > 0
-            ? `${css.taskList} ${css.paddings}`
-            : `${css.taskList}`
-        }
-      >
-        {tasks.map(({ text, _id, done }) => (
-          <Task
-            key={_id}
-            text={text}
-            _id={_id}
-            done={done}
-            filterOption={filterOption}
-          />
-        ))}
-      </ul>
-    </section>
+    <ul className={css.taskList}>
+      {tasks.map(({ text, _id, done }) => (
+        <Task
+          key={_id}
+          text={text}
+          _id={_id}
+          done={done}
+          filterOption={filterOption}
+        />
+      ))}
+    </ul>
   );
 };
 

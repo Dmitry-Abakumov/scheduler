@@ -1,7 +1,7 @@
 import Filter from "./Filter/Filter";
 import SearchTaskForm from "./SearchTaskForm";
 
-import { ITask } from "../../Types";
+import css from "./FilterBar.module.css";
 
 type Props = {
   filterOption: "all" | "done" | "inProgress";
@@ -12,10 +12,10 @@ type Props = {
 
 const FilterBar = ({ filterOption, setFilterOption }: Props) => {
   return (
-    <>
-      <Filter filterOption={filterOption} setFilterOption={setFilterOption} />
+    <div className={css.wrapper}>
       <SearchTaskForm filterOption={filterOption} />
-    </>
+      <Filter filterOption={filterOption} setFilterOption={setFilterOption} />
+    </div>
   );
 };
 
