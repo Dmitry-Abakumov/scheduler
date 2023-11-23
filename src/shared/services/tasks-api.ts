@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: "https://scheduler-2nt4.onrender.com/api",
+  baseURL: "https://scheduler-server-klu9.onrender.com/api",
 });
 
 export const getAllTasks = async () => {

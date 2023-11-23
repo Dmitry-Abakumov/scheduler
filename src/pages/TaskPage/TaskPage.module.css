@@ -26,10 +26,8 @@
   background-color: var(--primary-bg-color);
 }
 
-.filterBarWrap {
+.filterBarSection {
   padding: 15px 0px;
-
-  background-color: var(--primary-bg-color);
 }
 
 .line {

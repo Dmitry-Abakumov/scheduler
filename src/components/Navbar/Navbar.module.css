@@ -1,5 +1,5 @@
 .navbarWrap {
-  background-color: #f6fbf9;
+  background-color: var(--primary-bg-color);
   padding: 15px 0px;
   width: 100%;
 }

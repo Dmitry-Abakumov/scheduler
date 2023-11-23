@@ -4,8 +4,11 @@
   --primary-text-color: #2a303c;
   --secondary-text-color: #9aa6ac;
 
-  --primary-bg-color: #f6fbf9;
-  --secondary-bg-color: #c4c2c2;
+  --primary-bg-color: #e6ecea;
+  --secondary-bg-color: #ffffff;
+
+  --warning-color: #f68484;
+  --in-progress-color: #f6d284;
 
   --transition-dur-and-func: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -51,6 +54,7 @@ h6 {
 
 p {
   margin: 0;
+  hyphens: auto;
 }
 
 .commonIcon {

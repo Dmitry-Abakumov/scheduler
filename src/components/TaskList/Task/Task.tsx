@@ -1,6 +1,8 @@
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 
+import { BsTrash3 } from "react-icons/bs";
+
 import Checkbox from "../../../shared/components/Checkbox";
 import Button from "../../../shared/components/Button";
 
@@ -33,16 +35,19 @@ const Task = ({ text, _id, done, filterOption }: Props) => {
   };
 
   return (
-    <li className={css.taskWrap}>
-      <p className={done ? `${css.text} ${css.checkedText}` : `${css.text}`}>
-        {text}
-      </p>
+    <li className={done ? `${css.taskWrap} ${css.done}` : `${css.taskWrap}`}>
+      <div className={css.task}>
+        <p className={done ? `${css.text} ${css.checkedText}` : `${css.text}`}>
+          {text}
+        </p>
 
-      <div className={css.inputBtnWrap}>
-        <Checkbox checked={done} onCheckboxChange={onChackboxChange} />
-        <Button type="button" onClick={onDeleteBtnClick} className={css.btn}>
-          delete
-        </Button>
+        <div className={css.inputBtnWrap}>
+          <Checkbox checked={done} onCheckboxChange={onChackboxChange} />
+          <Button type="button" onClick={onDeleteBtnClick} className={css.btn}>
+            delete
+            <BsTrash3 size="15" className="commonIcon" />
+          </Button>
+        </div>
       </div>
     </li>
   );

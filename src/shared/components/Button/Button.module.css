@@ -15,7 +15,7 @@
 
   color: var(--primary-text-color);
 
-  background-color: #fff;
+  background-color: var(--secondary-bg-color);
 
   cursor: pointer;
 }

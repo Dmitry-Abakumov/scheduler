@@ -32,8 +32,7 @@ const TaskPage = () => {
 
   return (
     <div className={css.pageWrapper}>
-      <hr className={css.line} />
-      <section className={css.filterBarWrap}>
+      <section className={css.filterBarSection}>
         <Container>
           <FilterBar
             filterOption={filterOption}
@@ -41,7 +40,6 @@ const TaskPage = () => {
           />
         </Container>
       </section>
-      <hr className={css.line} />
       <section className={css.addTaskFormSection}>
         <Container className={css.container}>
           <AddTaskForm filterOption={filterOption} />
